@@ -17,7 +17,7 @@ public class Xigma_Hibernate {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Session Session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         
         User user = new User ("ninja","12345");
