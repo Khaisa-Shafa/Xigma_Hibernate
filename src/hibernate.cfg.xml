@@ -19,9 +19,6 @@
         <!-- SQL dialect -->
         <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
 
-        <!-- Enable Hibernate's automatic session context management -->
-        <property name="hibernate.current_session_context_class">thread</property>
-
         <!-- Echo all executed SQL to stdout -->
         <property name="hibernate.show_sql">true</property>
 
@@ -29,6 +26,10 @@
         <property name="hibernate.hbm2ddl.auto">create</property>
 
         <!-- Mention annotated class names -->
-        <mapping class="com.example.entity.YourEntityClass"/>
+        <mapping class="xigma_hibernate.User"/>
+        <mapping class="xigma_hibernate.Student"/>
+        <mapping class="xigma_hibernate.Teacher"/>
+        <mapping class="xigma_hibernate.Course"/>
+        <mapping class="xigma_hibernate.Class"/>
     </session-factory>
 </hibernate-configuration>

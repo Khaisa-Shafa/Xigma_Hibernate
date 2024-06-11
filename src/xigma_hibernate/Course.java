@@ -10,36 +10,31 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 /**
  *
  * @author VIVOBOOK
  */
-
 @Entity
-@Table(name="user")
-@Inheritance(strategy = InheritanceType.JOINED)
-public class User {
-    
-    public User(String username, String password){
-        this.username = username;
-        this.password = password;
-    }
-    
+@Table(name="course")
+public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
     @NotNull
-    @Column(name="username", nullable=false, unique=true)
-    private String username;
+    @Column(name="name",nullable=false)
+    private String name;
     
     @NotNull
-    @Column(name="password",nullable=false)
-    private String password;
+    @Column(name="course_id",nullable=false)
+    private String courseId;
+    
+    public Course(String name, String courseId){
+        this.name = name;
+        this.courseId = courseId;
+    }
 
     /**
      * @return the id
@@ -56,31 +51,30 @@ public class User {
     }
 
     /**
-     * @return the username
+     * @return the name
      */
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
     /**
-     * @param username the username to set
+     * @param name the name to set
      */
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
-     * @return the password
+     * @return the courseId
      */
-    public String getPassword() {
-        return password;
+    public String getCourseId() {
+        return courseId;
     }
 
     /**
-     * @param password the password to set
+     * @param courseId the courseId to set
      */
-    public void setPassword(String password) {
-        this.password = password;
+    public void setCourseId(String courseId) {
+        this.courseId = courseId;
     }
-    
 }
