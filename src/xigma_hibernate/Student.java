@@ -6,9 +6,11 @@ package xigma_hibernate;
 
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -28,6 +30,9 @@ public class Student extends User{
     @ManyToMany(mappedBy = "students")
     private Set<Class> classes = new HashSet<>();
     
+    @OneToMany(mappedBy = "students")
+    private Set<Score> scores = new HashSet<>();
+    
     public Student(String username, String password, String studentId) {
         super(username, password);
         this.studentId = studentId;
@@ -46,5 +51,35 @@ public class Student extends User{
     public void setStudentId(String studentId) {
         this.studentId = studentId;
     }
+
+    /**
+     * @return the classes
+     */
+    public Set<Class> getClasses() {
+        return classes;
+    }
+
+    /**
+     * @param classes the classes to set
+     */
+    public void setClasses(Set<Class> classes) {
+        this.classes = classes;
+    }
+
+    /**
+     * @return the score
+     */
+    public Set<Score> getScores() {
+        return scores;
+    }
+
+    /**
+     * @param scores the scores to set
+     */
+    public void setScore(Set<Score> scores) {
+        this.scores = scores;
+    }
+
+   
     
 }

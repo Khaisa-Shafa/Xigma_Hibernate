@@ -5,7 +5,9 @@
 package xigma_hibernate;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,6 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -50,6 +53,9 @@ public class Class {
             inverseJoinColumns = @JoinColumn(name="class_id")
             )
     private Set<Student> students = new HashSet<>();
+    
+    @OneToMany(mappedBy = "students")
+    private Set<Score> scores = new HashSet<>();
 
     /**
      * @return the id
@@ -119,6 +125,20 @@ public class Class {
      */
     public void setStudents(Set<Student> students) {
         this.students = students;
+    }
+
+    /**
+     * @return the scores
+     */
+    public Set<Score> getScores() {
+        return scores;
+    }
+
+    /**
+     * @param scores the scores to set
+     */
+    public void setScores(Set<Score> scores) {
+        this.scores = scores;
     }
            
 }

@@ -31,5 +31,6 @@
         <mapping class="xigma_hibernate.Teacher"/>
         <mapping class="xigma_hibernate.Course"/>
         <mapping class="xigma_hibernate.Class"/>
+        <mapping class="xigma_hibernate.Score"/>
     </session-factory>
 </hibernate-configuration>

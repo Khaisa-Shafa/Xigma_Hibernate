@@ -37,12 +37,17 @@ public class Xigma_Hibernate {
         session.save(course1);
         
         Class class1 = new Class("KOM A");
-        session.save(class1);
         class1.setTeacher(teacher1);
         class1.setCourse(course1);
         class1.getStudents().add(student1);
         class1.getStudents().add(student2);
         session.save(class1);
+        
+        Score score1 = new Score(98);
+        score1.setClasses(class1);
+        score1.setStudents(student1);
+        score1.setCourse(course1);
+        session.save(score1);
         
         transaction.commit();
         session.close();

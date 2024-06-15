@@ -20,6 +20,7 @@ public class Teacher extends User {
     
     @Column(name="teacher_id",nullable=false, unique=true)
     private String teacherId;
+    
     public Teacher(String username, String password, String teacherId) {
         super(username, password);
         this.teacherId = teacherId;
