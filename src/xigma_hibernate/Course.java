@@ -35,6 +35,7 @@ public class Course {
         this.name = name;
         this.courseId = courseId;
     }
+    
 
     /**
      * @return the id
@@ -77,4 +78,5 @@ public class Course {
     public void setCourseId(String courseId) {
         this.courseId = courseId;
     }
+
 }

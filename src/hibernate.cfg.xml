@@ -32,5 +32,6 @@
         <mapping class="xigma_hibernate.Course"/>
         <mapping class="xigma_hibernate.Class"/>
         <mapping class="xigma_hibernate.Score"/>
+        <mapping class="xigma_hibernate.Transcript"/>
     </session-factory>
 </hibernate-configuration>

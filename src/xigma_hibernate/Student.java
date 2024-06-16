@@ -5,6 +5,7 @@
 package xigma_hibernate;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -32,6 +33,17 @@ public class Student extends User{
     
     @OneToMany(mappedBy = "students")
     private Set<Score> scores = new HashSet<>();
+    
+    @OneToMany(mappedBy = "students")
+    private List<Transcript> transcripts;
+
+    public void printCourseScores(){
+        for (Transcript transcript : transcripts ){
+            Course course = transcript.getCourse();
+            System.out.println(course.getCourseId()+" "+course.getName()+" "+ transcript.getScore());
+        }
+    }
+    
     
     public Student(String username, String password, String studentId) {
         super(username, password);
@@ -77,7 +89,28 @@ public class Student extends User{
      * @param scores the scores to set
      */
     public void setScore(Set<Score> scores) {
+        this.setScores(scores);
+    }
+
+    /**
+     * @param scores the scores to set
+     */
+    public void setScores(Set<Score> scores) {
         this.scores = scores;
+    }
+
+    /**
+     * @return the transcripts
+     */
+    public List<Transcript> getTranscripts() {
+        return transcripts;
+    }
+
+    /**
+     * @param transcripts the transcripts to set
+     */
+    public void setTranscripts(List<Transcript> transcripts) {
+        this.transcripts = transcripts;
     }
 
    
