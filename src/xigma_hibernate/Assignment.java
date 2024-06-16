@@ -31,7 +31,7 @@ public class Assignment extends Activity {
     public String getDescription() {
         return "Assignment due on " + dueDate.toString();
     }
-
+    //
     public LocalDateTime getDueDate() {
         return dueDate;
     }

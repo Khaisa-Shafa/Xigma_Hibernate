@@ -30,7 +30,7 @@ public class Meeting extends Activity {
     public String getDescription() {
         return "Meeting at " + meetingStartTime.toString();
     }
-
+    //
     public LocalDateTime getMeetingStartTime() {
         return meetingStartTime;
     }

@@ -66,4 +66,5 @@ public abstract class Activity {
     public void setCourse(Course course) {
         this.course = course;
     }
+    //
 }
