@@ -14,6 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  *
@@ -36,6 +37,10 @@ public class Student extends User{
     
     @OneToMany(mappedBy = "students")
     private List<Transcript> transcripts;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "supervisor_id")
+    private Teacher supervisor;
 
     public void printCourseScores(){
         for (Transcript transcript : transcripts ){
