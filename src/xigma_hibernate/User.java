@@ -40,6 +40,7 @@ public class User {
     @NotNull
     @Column(name="password",nullable=false)
     private String password;
+    
 
     /**
      * @return the id
@@ -82,5 +83,4 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-    
 }

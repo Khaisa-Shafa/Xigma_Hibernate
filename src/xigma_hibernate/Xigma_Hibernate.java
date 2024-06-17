@@ -7,7 +7,9 @@ package xigma_hibernate;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 
 /**
  *
@@ -19,9 +21,11 @@ public class Xigma_Hibernate {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         Transaction transaction = session.beginTransaction();
+        
 
         User user = new User("ninja","12345");
         session.save(user);
@@ -31,6 +35,9 @@ public class Xigma_Hibernate {
         
         Student student2 = new Student("shafa","12345","221401002");
         session.save(student2);
+        
+        Student student3 = new Student("alya","12345","221401003");
+        session.save(student3);
         
         Teacher teacher1 = new Teacher("dewi", "12345", "0102030405");
         session.save(teacher1);
@@ -59,7 +66,74 @@ public class Xigma_Hibernate {
         
         transaction.commit();
         session.close();
+        
+        /*Zihan*/
+        Score score1_1 = new Score(88);
+        score1_1.setStudent(student1);
+        Score score1_2 = new Score(76);
+        score1_2.setStudent(student1);
+        Score score1_3 = new Score(91);
+        score1_3.setStudent(student1);
+        student1.getScores().add(score1_1);
+        student1.getScores().add(score1_2);
+        student1.getScores().add(score1_3);
+        
+        Score score2_1 = new Score(68);
+        score2_1.setStudent(student2);
+        Score score2_2 = new Score(74);
+        score2_2.setStudent(student2);
+        Score score2_3 = new Score(82);
+        score2_3.setStudent(student2);
+        student2.getScores().add(score2_1);
+        student2.getScores().add(score2_2);
+        student2.getScores().add(score2_3);
+        
+        Score score3_1 = new Score(54);
+        score3_1.setStudent(student3);
+        Score score3_2 = new Score(48);
+        score3_2.setStudent(student3);
+        Score score3_3 = new Score(72);
+        score3_3.setStudent(student3);
+        student3.getScores().add(score3_1);
+        student3.getScores().add(score3_2);
+        student3.getScores().add(score3_3);
+        
+        // Save students and scores to the database
+        session.save(student1);
+        session.save(score1_1);
+        session.save(score1_2);
+        session.save(score1_3);
+
+        session.save(student2);
+        session.save(score2_1);
+        session.save(score2_2);
+        session.save(score2_3);
+
+        session.save(student3);
+        session.save(score3_1);
+        session.save(score3_2);
+        session.save(score3_3);
+
+        transaction.commit();
+        
+         // Fetch and display GPA for each student
+        displayStudentGPA(session, student1.getId());
+        displayStudentGPA(session, student2.getId());
+        displayStudentGPA(session, student3.getId());
+        
     }
 
+    private static void displayStudentGPA(Session session, int studentId) {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    
+        Student student = session.get(Student.class, studentId);
+        if (student != null){
+            System.out.println(student.getStudentId() + "'s GPA: " + student.calculateGPA());
+        }else{
+            System.out.println("Student not found");
+        }
+    }
+
+    
 
 }

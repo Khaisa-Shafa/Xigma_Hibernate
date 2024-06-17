@@ -16,7 +16,7 @@ public class HibernateUtil {
         try {
             sessionFactory = new Configuration().configure().buildSessionFactory();
         } catch (HibernateException ex) {
-            throw new ExceptionInInitializerError(ex);
+            //throw new ExceptionInInitializerError(ex);
         }
     }
 
