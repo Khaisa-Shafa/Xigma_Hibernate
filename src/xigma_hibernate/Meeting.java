@@ -23,7 +23,7 @@ public class Meeting extends Activity {
     @Column(name = "meeting_start_time")
     private LocalDateTime meetingStartTime;
 
-    @ManyToMany(mappedBy = "meetings")
+    @ManyToMany(mappedBy = "meeting")
     private Set<Student> attendees = new HashSet<>();
 
     @Override

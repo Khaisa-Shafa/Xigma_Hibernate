@@ -4,6 +4,8 @@
  */
 package xigma_hibernate;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -33,7 +35,7 @@ public class Xigma_Hibernate {
         Teacher teacher1 = new Teacher("dewi", "12345", "0102030405");
         session.save(teacher1);
         
-        Course course1 = new Course("PBO", "ILK010101");
+        Course course1 = new Course("PBO", "ILK010101", "ppp");
         session.save(course1);
         
         Class class1 = new Class("KOM A");
@@ -45,9 +47,15 @@ public class Xigma_Hibernate {
         
         Score score1 = new Score(98);
         score1.setClasses(class1);
-        score1.setStudents(student1);
-        score1.setCourse(course1);
+        score1.setStudent(student1);
         session.save(score1);
+        
+        Transcript transcript1 = new Transcript(course1,course1, 89);
+        transcript1.setStudent(student1);
+        session.save(transcript1);
+                
+        student1.getTranscripts().add(transcript1);
+        session.update(student1);
         
         transaction.commit();
         session.close();

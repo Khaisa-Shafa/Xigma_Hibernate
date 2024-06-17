@@ -52,7 +52,7 @@ public class Class {
             )
     private Set<Student> students = new HashSet<>();
     
-    @OneToMany(mappedBy = "students")
+    @OneToMany(mappedBy = "classes")
     private Set<Score> scores = new HashSet<>();
 
     /**

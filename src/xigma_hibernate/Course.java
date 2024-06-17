@@ -31,9 +31,13 @@ public class Course {
     @Column(name="course_id",nullable=false)
     private String courseId;
     
-    public Course(String name, String courseId){
+    @Column(name="courseCode",nullable=false)
+    private String courseCode;
+    
+    public Course(String name, String courseId, String courseCode){
         this.name = name;
         this.courseId = courseId;
+        this.courseCode = courseCode;
     }
     
 
@@ -77,6 +81,20 @@ public class Course {
      */
     public void setCourseId(String courseId) {
         this.courseId = courseId;
+    }
+
+    /**
+     * @return the courseCode
+     */
+    public String getCourseCode() {
+        return courseCode;
+    }
+
+    /**
+     * @param courseCode the courseCode to set
+     */
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
     }
 
 }

@@ -5,9 +5,11 @@
 package xigma_hibernate;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -22,20 +24,26 @@ public class Transcript {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
+    @ManyToOne(fetch=FetchType.LAZY)
+    private Course courseCode;
+    
+    @ManyToOne(fetch=FetchType.LAZY)
+    private Course name;
+    
     @ManyToOne
+    @JoinColumn(name="student_id")
     private Student student;
     
-    @ManyToOne
-    private Course course;
-    
+    @ManyToOne(fetch=FetchType.LAZY)
     private int score;
 
-    public Transcript(Student student, Course course, int score) {
-        this.student = student;
-        this.course = course;
+    public Transcript(Course courseCode, Course name,int score) {
+        this.courseCode = courseCode;
+        this.name = name;
         this.score = score;
     }
 
+    
     /**
      * @return the id
      */
@@ -50,6 +58,22 @@ public class Transcript {
         this.id = id;
     }
 
+   
+    /**
+     * @return the score
+     */
+    public int getScore() {
+        return score;
+    }
+
+    /**
+     * @param score the score to set
+     */
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+   
     /**
      * @return the student
      */
@@ -65,33 +89,38 @@ public class Transcript {
     }
 
     /**
-     * @return the course
+     * @return the courseCode
      */
-    public Course getCourse() {
-        return course;
+    public Course getCourseCode() {
+        return courseCode;
     }
 
     /**
-     * @param course the course to set
+     * @param courseCode the courseCode to set
      */
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setCourseCode(Course courseCode) {
+        this.courseCode = courseCode;
     }
 
     /**
-     * @return the score
+     * @return the name
      */
-    public int getScore() {
-        return score;
+    public Course getName() {
+        return name;
     }
 
     /**
-     * @param score the score to set
+     * @param name the name to set
      */
-    public void setScore(int score) {
-        this.score = score;
+    public void setName(Course name) {
+        this.name = name;
     }
+
     
+
+   
+
+  
     
     
 }

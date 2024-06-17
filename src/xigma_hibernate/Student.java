@@ -7,7 +7,6 @@ package xigma_hibernate;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
@@ -32,27 +31,27 @@ public class Student extends User{
     @ManyToMany(mappedBy = "students")
     private Set<Class> classes = new HashSet<>();
     
-    @OneToMany(mappedBy = "students")
+    @OneToMany(mappedBy = "student")
     private Set<Score> scores = new HashSet<>();
     
-    @OneToMany(mappedBy = "students")
+    @OneToMany(mappedBy = "student")
     private List<Transcript> transcripts;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "supervisor_id")
     private Teacher supervisor;
-
-    public void printCourseScores(){
-        for (Transcript transcript : transcripts ){
-            Course course = transcript.getCourse();
-            System.out.println(course.getCourseId()+" "+course.getName()+" "+ transcript.getScore());
-        }
-    }
     
     
     public Student(String username, String password, String studentId) {
         super(username, password);
         this.studentId = studentId;
+    }
+    
+    public void printCourseScores(){
+        for (Transcript transcript : transcripts ){
+            Course course = transcript.getCourseCode();
+            System.out.println(transcript.getCourseCode()+" "+transcript.getName()+" "+ transcript.getScore());
+        }
     }
 
     /**
@@ -118,6 +117,19 @@ public class Student extends User{
         this.transcripts = transcripts;
     }
 
+    /**
+     * @return the supervisor
+     */
+    public Teacher getSupervisor() {
+        return supervisor;
+    }
+
+    /**
+     * @param supervisor the supervisor to set
+     */
+    public void setSupervisor(Teacher supervisor) {
+        this.supervisor = supervisor;
+    }
    
     
 }
