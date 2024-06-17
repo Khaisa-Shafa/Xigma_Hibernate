@@ -37,6 +37,7 @@ public class Student extends User{
     @OneToMany(mappedBy = "student")
     private List<Transcript> transcripts;
     
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "supervisor_id")
     private Teacher supervisor;
@@ -130,6 +131,44 @@ public class Student extends User{
     public void setSupervisor(Teacher supervisor) {
         this.supervisor = supervisor;
     }
+    
+    /*Zihan*/
+    public double calculateGPA() {
+        double totalGradePoints = 0.0;
+        int totalCourses = scores.size();
+
+        for (Score score : scores) {
+            totalGradePoints += convertScoreToGradePoint(score.getScore());
+        }
+
+        return totalGradePoints / totalCourses;
+    }
+    
+    private double convertScoreToGradePoint(int score) {
+        if (score >= 90) {
+            return 4.0; // A
+        } else if (score >= 85) {
+            return 3.7; // A-
+        } else if (score >= 80) {
+            return 3.3; // B+
+        } else if (score >= 75) {
+            return 3.0; // B
+        } else if (score >= 70) {
+            return 2.7; // B-
+        } else if (score >= 65) {
+            return 2.3; // C+
+        } else if (score >= 60) {
+            return 2.0; // C
+        } else if (score >= 55) {
+            return 1.7; // C-
+        } else if (score >= 50) {
+            return 1.0; // D
+        } else {
+            return 0.0; // E
+        }
+    }
+    /*Zihan*/
+
    
     
 }
