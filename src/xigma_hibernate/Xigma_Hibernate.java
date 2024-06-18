@@ -4,8 +4,11 @@
  */
 package xigma_hibernate;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -62,7 +65,35 @@ public class Xigma_Hibernate {
                 
 //        student1.getTranscripts().add(transcript1);
 //        session.update(student1);
-
+        
+        //Fathya test Meeting
+        Meeting meeting1 = new Meeting();
+        meeting1.setMeetingStartTime(LocalDateTime.now());
+        meeting1.setMyClass(class1);
+        meeting1.setTeacher(teacher1);
+        meeting1.setCourse(course1);
+        
+        Set<Student> attendees = new HashSet<>();
+        attendees.add(student2);
+        attendees.add(student3);
+        meeting1.setAttendees(attendees);
+        
+        session.save(meeting1);
+        
+        //test Assignment
+        Assignment assignment1 = new Assignment();
+        assignment1.setMyClass(class1);
+        assignment1.setTeacher(teacher1);
+        assignment1.setCourse(course1);
+        assignment1.setDueDate(LocalDateTime.now().plusDays(7));
+        
+        Set<Student> assignees = new HashSet<>();
+        assignees.add(student1);
+        assignees.add(student2);
+        assignment1.setAssignees(assignees);
+        
+        session.save(assignment1);
+        
         transaction.commit();
         session.close();
         
@@ -120,6 +151,8 @@ public class Xigma_Hibernate {
         displayStudentGPA(session, student2.getId());
         displayStudentGPA(session, student3.getId());
         
+        displayActivityMeeting(meeting1);
+        
     }
 
     private static void displayStudentGPA(Session session, int studentId) {
@@ -132,7 +165,14 @@ public class Xigma_Hibernate {
             System.out.println("Student not found");
         }
     }
-
+    
+    private static void displayActivityMeeting(Meeting meeting) {
+            System.out.println("meeting : \n" + meeting.getDescription() + "\n" + meeting.getAttendees());
+    }
+    
+    private static void displayActivityAssignment(Assignment assignment) {
+            System.out.println("meeting : \n" + assignment.getDescription() + "\n" + assignment.getAssignees());
+    }
     
 
 }
