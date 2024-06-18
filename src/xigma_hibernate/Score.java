@@ -34,11 +34,14 @@ public class Score{
     private int score;
     
     @ManyToOne
-    @JoinColumn(name="class_id")
+    @JoinColumn(name="class")
     private Class classes;
     
     @ManyToOne(fetch=FetchType.LAZY)
     private Student student;
+    
+    @ManyToOne(fetch=FetchType.LAZY)
+    private Course course;
 
     /**
      * @return the id
@@ -94,6 +97,20 @@ public class Score{
      */
     public void setClasses(Class classes) {
         this.classes = classes;
+    }
+
+    /**
+     * @return the course
+     */
+    public Course getCourse() {
+        return course;
+    }
+
+    /**
+     * @param course the course to set
+     */
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
 }

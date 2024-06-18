@@ -29,6 +29,11 @@ public class Xigma_Hibernate {
 
         Transaction transaction = session.beginTransaction();
 
+        SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+
+        // Create session
+       
+        
         User user = new User("ninja","12345");
         session.save(user);
     
@@ -44,7 +49,7 @@ public class Xigma_Hibernate {
         Teacher teacher1 = new Teacher("dewi", "12345", "0102030405");
         session.save(teacher1);
         
-        Course course1 = new Course("PBO", "ILK010101", "ppp");
+        Course course1 = new Course("PBO", "ILK010101");
         session.save(course1);
         
         Class class1 = new Class("KOM A");
@@ -95,7 +100,6 @@ public class Xigma_Hibernate {
         session.save(assignment1);
         
         transaction.commit();
-        session.close();
         
         /*Zihan*/
         Score score1_1 = new Score(88);
@@ -152,6 +156,43 @@ public class Xigma_Hibernate {
         displayStudentGPA(session, student3.getId());
         
         displayActivityMeeting(meeting1);
+        
+        Transcript transcript1 = new Transcript("C101", "Mathematics", 95);
+        Transcript transcript2 = new Transcript("C102", "Science", 88);
+
+            // Add transcripts to the student's transcript list
+            List<Transcript> transcripts = new ArrayList<>();
+            transcripts.add(transcript1);
+            transcripts.add(transcript2);
+            student1.setTranscripts(transcripts);
+
+        
+        
+        try {
+            
+            // Query all students and their transcripts
+            List<Student> students = session.createQuery("FROM Student", Student.class).list();
+            
+            // Commit the transaction
+            transaction.commit();
+            
+            // Print all transcripts to the console
+            for (Student student : students) {
+                for (Transcript transcript : student.getTranscripts()) {
+                    System.out.println("Student ID: " + student.getStudentId() +
+                                       ", Course: " + transcript.getCourseId() +
+                                       ", Course Name: " + transcript.getName() +
+                                       ", Score: " + transcript.getScore());
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            session.close(); // Close the session when done
+            factory.close(); // Close the session factory when done
+        }
+        
+        session.close();
         
     }
 

@@ -4,9 +4,11 @@
  */
 package xigma_hibernate;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
@@ -32,11 +34,11 @@ public class Student extends User{
     private Set<Class> classes = new HashSet<>();
     
     @OneToMany(mappedBy = "student")
-    private Set<Score> scores = new HashSet<>();
+    private Set<Score> scores= new HashSet<>();
     
-//    @OneToMany(mappedBy = "student")
-//    private List<Transcript> transcripts;
-    
+    @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(name = "student_transcripts", joinColumns = @JoinColumn(name = "student_id"))
+    private List<Transcript> transcripts = new ArrayList<>();
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "supervisor_id")
@@ -48,12 +50,31 @@ public class Student extends User{
         this.studentId = studentId;
     }
     
-//    public void printCourseScores(){
-//        for (Transcript transcript : transcripts ){
-//            Course course = transcript.getCourseCode();
-//            System.out.println(transcript.getCourseCode()+" "+transcript.getName()+" "+ transcript.getScore());
+//    public void printTranscripts() {
+//        if (transcripts != null && !transcripts.isEmpty()) {
+//            for (Transcript transcript : transcripts) {
+//                System.out.println("Course: " + transcript.getCourseId() + 
+//                                   ", Course Name: " + transcript.getName() + 
+//                                   ", Score: " + transcript.getScore());
+//            }
+//        } else {
+//            System.out.println("No transcripts available for this student.");
 //        }
 //    }
+    
+    /**
+     * @return the transcripts
+     */
+    public List<Transcript> getTranscripts() {
+//        if (transcripts != null) {
+//            for (Transcript transcript : transcripts) {
+//                System.out.println("Course: " + transcript.getCourseId() + ", Course Name: " + transcript.getName() + ", Score: " + transcript.getScore());
+//            }
+//        } else {
+//            System.out.println("No transcripts available for this student.");
+//        }
+        return transcripts;
+    }
 
     /**
      * @return the studentId
@@ -103,20 +124,14 @@ public class Student extends User{
     public void setScores(Set<Score> scores) {
         this.scores = scores;
     }
-//
-//    /**
-//     * @return the transcripts
-//     */
-//    public List<Transcript> getTranscripts() {
-//        return transcripts;
-//    }
-//
-//    /**
-//     * @param transcripts the transcripts to set
-//     */
-//    public void setTranscripts(List<Transcript> transcripts) {
-//        this.transcripts = transcripts;
-//    }
+
+
+    /**
+     * @param transcripts the transcripts to set
+     */
+    public void setTranscripts(List<Transcript> transcripts) {
+        this.transcripts = transcripts;
+    }
 
     /**
      * @return the supervisor
@@ -168,7 +183,5 @@ public class Student extends User{
         }
     }
     /*Zihan*/
-
-   
-    
+     
 }
