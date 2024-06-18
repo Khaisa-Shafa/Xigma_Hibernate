@@ -30,6 +30,9 @@ public class Student extends User{
     @Column(name="student_id",nullable=false, unique=true)
     private String studentId;
     
+    @Column(name="gpa")
+    private String gpa;
+    
     @ManyToMany(mappedBy = "students")
     private Set<Class> classes = new HashSet<>();
     
@@ -80,6 +83,16 @@ public class Student extends User{
 //        }
         return transcripts;
     }
+    
+    //zihan
+    public String getGpa(){
+        return gpa;
+    }
+    
+    public void setGpa(String gpa){
+        this.gpa = gpa;
+    }
+    //zihan
 
     /**
      * @return the studentId
@@ -160,6 +173,13 @@ public class Student extends User{
         for (Score score : scores) {
             totalGradePoints += convertScoreToGradePoint(score.getScore());
         }
+        
+        if (totalCourses > 0) {
+            double gpa = totalGradePoints / totalCourses;
+            this.gpa = convertGradePointToLetter(gpa);
+        } else {
+            this.gpa = "N/A";
+        }
 
         return totalGradePoints / totalCourses;
     }
@@ -185,6 +205,37 @@ public class Student extends User{
             return 1.0; // D
         } else {
             return 0.0; // E
+        }
+    }
+    
+    private String convertGradePointToLetter(double gpa) {
+        if (gpa >= 4.0) {
+            return "A";
+        } else if (gpa >= 3.7) {
+            return "A-";
+        } else if (gpa >= 3.3) {
+            return "B+";
+        } else if (gpa >= 3.0) {
+            return "B";
+        } else if (gpa >= 2.7) {
+            return "B-";
+        } else if (gpa >= 2.3) {
+            return "C+";
+        } else if (gpa >= 2.0) {
+            return "C";
+        } else if (gpa >= 1.7) {
+            return "C-";
+        } else if (gpa >= 1.0) {
+            return "D";
+        } else {
+            return "E";
+        }
+    }
+    
+    public void printTranscript() {
+        System.out.printf("%-15s %-20s %-5s%n", "courseId", "name", "score");
+        for (Transcript transcript : transcripts) {
+            System.out.printf("%-15s %-20s %-5d%n", transcript.getCourseId(), transcript.getName(), transcript.getScore());
         }
     }
     /*Zihan*/

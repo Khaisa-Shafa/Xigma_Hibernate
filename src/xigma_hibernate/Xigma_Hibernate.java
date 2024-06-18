@@ -57,12 +57,58 @@ public class Xigma_Hibernate {
         class1.setCourse(course1);
         class1.getStudents().add(student1);
         class1.getStudents().add(student2);
+        class1.getStudents().add(student3);
         session.save(class1);
         
         Score score1 = new Score(98);
         score1.setClasses(class1);
         score1.setStudent(student1);
         session.save(score1);
+        
+        Score score2 = new Score(88);
+        score2.setClasses(class1);
+        score2.setStudent(student1);
+        session.save(score2);
+        
+        Score score3 = new Score(76);
+        score3.setClasses(class1);
+        score3.setStudent(student1);
+        session.save(score3);
+        
+        Score score4 = new Score(91);
+        score4.setClasses(class1);
+        score4.setStudent(student1);
+        session.save(score4);
+        
+        Score score5 = new Score(68);
+        score5.setClasses(class1);
+        score5.setStudent(student2);
+        session.save(score5);
+        
+        Score score6 = new Score(74);
+        score6.setClasses(class1);
+        score6.setStudent(student2);
+        session.save(score6);
+        
+        Score score7 = new Score(82);
+        score7.setClasses(class1);
+        score7.setStudent(student2);
+        session.save(score7);
+        
+        Score score8 = new Score(54);
+        score8.setClasses(class1);
+        score8.setStudent(student3);
+        session.save(score8);
+        
+        Score score9 = new Score(48);
+        score9.setClasses(class1);
+        score9.setStudent(student3);
+        session.save(score9);
+        
+        Score score10 = new Score(72);
+        score10.setClasses(class1);
+        score10.setStudent(student3);
+        session.save(score10);
         
 //        Transcript transcript1 = new Transcript(course1,course1);
 //        transcript1.setStudent(student1);
@@ -102,53 +148,16 @@ public class Xigma_Hibernate {
         transaction.commit();
         
         /*Zihan*/
-        Score score1_1 = new Score(88);
-        score1_1.setStudent(student1);
-        Score score1_2 = new Score(76);
-        score1_2.setStudent(student1);
-        Score score1_3 = new Score(91);
-        score1_3.setStudent(student1);
-        student1.getScores().add(score1_1);
-        student1.getScores().add(score1_2);
-        student1.getScores().add(score1_3);
         
-        Score score2_1 = new Score(68);
-        score2_1.setStudent(student2);
-        Score score2_2 = new Score(74);
-        score2_2.setStudent(student2);
-        Score score2_3 = new Score(82);
-        score2_3.setStudent(student2);
-        student2.getScores().add(score2_1);
-        student2.getScores().add(score2_2);
-        student2.getScores().add(score2_3);
-        
-        Score score3_1 = new Score(54);
-        score3_1.setStudent(student3);
-        Score score3_2 = new Score(48);
-        score3_2.setStudent(student3);
-        Score score3_3 = new Score(72);
-        score3_3.setStudent(student3);
-        student3.getScores().add(score3_1);
-        student3.getScores().add(score3_2);
-        student3.getScores().add(score3_3);
-        
-        // Save students and scores to the database
-        session.save(student1);
-        session.save(score1_1);
-        session.save(score1_2);
-        session.save(score1_3);
-
-        session.save(student2);
-        session.save(score2_1);
-        session.save(score2_2);
-        session.save(score2_3);
-
-        session.save(student3);
-        session.save(score3_1);
-        session.save(score3_2);
-        session.save(score3_3);
-
-        transaction.commit();
+        // Update and save GPA
+        session.beginTransaction();
+        student1.calculateGPA();
+        session.update(student1);
+        student2.calculateGPA();
+        session.update(student2);
+        student3.calculateGPA();
+        session.update(student3);
+        session.getTransaction().commit();
         
          // Fetch and display GPA for each student
         displayStudentGPA(session, student1.getId());
@@ -166,7 +175,21 @@ public class Xigma_Hibernate {
             transcripts.add(transcript2);
             student1.setTranscripts(transcripts);
 
-        
+            //Zihan
+            // Save transcripts
+            session.beginTransaction();
+            session.save(transcript1);
+            session.save(transcript2);
+            session.update(student1);
+            session.getTransaction().commit();
+            
+            // Print student1's transcripts
+            System.out.println("Transcripts for Student 1:");
+            student1.printTranscript();
+
+            session.close();
+            factory.close();
+            //Zihan
         
         try {
             
