@@ -44,6 +44,11 @@ public class Student extends User{
     @JoinColumn(name = "supervisor_id")
     private Teacher supervisor;
     
+    @ManyToMany(mappedBy = "attendees")
+    private Set<Meeting> meetings = new HashSet<>();
+    
+    @ManyToMany(mappedBy = "assignees")
+    private Set<Assignment> assignments = new HashSet<>();
     
     public Student(String username, String password, String studentId) {
         super(username, password);

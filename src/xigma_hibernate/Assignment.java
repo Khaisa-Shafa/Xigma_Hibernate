@@ -9,6 +9,8 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -23,7 +25,12 @@ public class Assignment extends Activity {
     @Column(name = "due_date")
     private LocalDateTime dueDate;
 
-    @ManyToMany(mappedBy = "assignments")
+    @ManyToMany
+    @JoinTable(
+        name = "assignment_student",   // Name of the join table
+        joinColumns = @JoinColumn(name = "assignment_id"),  // FK column in this entity's table
+        inverseJoinColumns = @JoinColumn(name = "student_id")  // FK column in the other entity's table
+    )
     private Set<Student> assignees = new HashSet<>();
 
 

@@ -34,7 +34,7 @@
         <mapping class="xigma_hibernate.Score"/>
 <!--        <mapping class="xigma_hibernate.Transcript"/>-->
         <mapping class="xigma_hibernate.Activity"/>
-        <!--<mapping class="xigma_hibernate.Meeting"/>-->
-        <!--<mapping class="xigma_hibernate.Assignment"/>-->
+        <mapping class="xigma_hibernate.Meeting"/>
+        <mapping class="xigma_hibernate.Assignment"/>
     </session-factory>
 </hibernate-configuration>

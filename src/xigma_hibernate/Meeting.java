@@ -9,6 +9,8 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -23,7 +25,12 @@ public class Meeting extends Activity {
     @Column(name = "meeting_start_time")
     private LocalDateTime meetingStartTime;
 
-    @ManyToMany(mappedBy = "meeting")
+    @ManyToMany
+    @JoinTable(
+        name = "meeting_student",
+        joinColumns = @JoinColumn(name = "meeting_id"),
+        inverseJoinColumns = @JoinColumn(name = "student_id")
+    )
     private Set<Student> attendees = new HashSet<>();
 
     @Override
