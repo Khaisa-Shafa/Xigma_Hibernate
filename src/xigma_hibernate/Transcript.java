@@ -16,10 +16,10 @@ public class Transcript {
     private String courseId;
     private String name;
     private int score;
-
+    
     
     public Transcript(){
-        
+    
     }
     public Transcript(String courseId, String name, int score) {
         this.courseId = courseId;
@@ -67,6 +67,6 @@ public class Transcript {
      */
     public void setScore(int score) {
         this.score = score;
-    }       
+    }
     
 }
