@@ -42,7 +42,7 @@ public class Score{
     
     @ManyToOne(fetch=FetchType.LAZY)
     private Course course;
-
+    
     /**
      * @return the id
      */

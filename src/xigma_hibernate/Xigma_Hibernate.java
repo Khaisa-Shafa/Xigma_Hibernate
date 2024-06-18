@@ -49,8 +49,14 @@ public class Xigma_Hibernate {
         Teacher teacher1 = new Teacher("dewi", "12345", "0102030405");
         session.save(teacher1);
         
+        Teacher teacher2 = new Teacher("layla", "12345", "0102030406");
+        session.save(teacher2);
+        
         Course course1 = new Course("PBO", "ILK010101");
         session.save(course1);
+        
+        Course course2 = new Course("JARKOM", "ILK010102");
+        session.save(course2);
         
         Class class1 = new Class("KOM A");
         class1.setTeacher(teacher1);
@@ -60,55 +66,49 @@ public class Xigma_Hibernate {
         class1.getStudents().add(student3);
         session.save(class1);
         
+        Class class2 = new Class("KOM B");
+        class2.setTeacher(teacher2);
+        class2.setCourse(course2);
+        class2.getStudents().add(student1);
+        class2.getStudents().add(student2);
+        class2.getStudents().add(student3);
+        session.save(class2);
+        
         Score score1 = new Score(98);
         score1.setClasses(class1);
         score1.setStudent(student1);
+        score1.setCourse(course1);
         session.save(score1);
         
         Score score2 = new Score(88);
-        score2.setClasses(class1);
+        score2.setClasses(class2);
         score2.setStudent(student1);
+        score2.setCourse(course2);
         session.save(score2);
         
-        Score score3 = new Score(76);
+        Score score3 = new Score(68);
         score3.setClasses(class1);
-        score3.setStudent(student1);
+        score3.setStudent(student2);
+        score3.setCourse(course1);
         session.save(score3);
         
-        Score score4 = new Score(91);
-        score4.setClasses(class1);
-        score4.setStudent(student1);
+        Score score4 = new Score(74);
+        score4.setClasses(class2);
+        score4.setStudent(student2);
+        score4.setCourse(course2);
         session.save(score4);
         
-        Score score5 = new Score(68);
+        Score score5 = new Score(54);
         score5.setClasses(class1);
-        score5.setStudent(student2);
+        score5.setStudent(student3);
+        score5.setCourse(course1);
         session.save(score5);
         
-        Score score6 = new Score(74);
-        score6.setClasses(class1);
-        score6.setStudent(student2);
+        Score score6 = new Score(48);
+        score6.setClasses(class2);
+        score6.setStudent(student3);
+        score6.setCourse(course2);
         session.save(score6);
-        
-        Score score7 = new Score(82);
-        score7.setClasses(class1);
-        score7.setStudent(student2);
-        session.save(score7);
-        
-        Score score8 = new Score(54);
-        score8.setClasses(class1);
-        score8.setStudent(student3);
-        session.save(score8);
-        
-        Score score9 = new Score(48);
-        score9.setClasses(class1);
-        score9.setStudent(student3);
-        session.save(score9);
-        
-        Score score10 = new Score(72);
-        score10.setClasses(class1);
-        score10.setStudent(student3);
-        session.save(score10);
         
 //        Transcript transcript1 = new Transcript(course1,course1);
 //        transcript1.setStudent(student1);
