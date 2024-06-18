@@ -34,8 +34,8 @@ public class Student extends User{
     @OneToMany(mappedBy = "student")
     private Set<Score> scores = new HashSet<>();
     
-    @OneToMany(mappedBy = "student")
-    private List<Transcript> transcripts;
+//    @OneToMany(mappedBy = "student")
+//    private List<Transcript> transcripts;
     
     
     @ManyToOne(fetch = FetchType.LAZY)
@@ -48,12 +48,12 @@ public class Student extends User{
         this.studentId = studentId;
     }
     
-    public void printCourseScores(){
-        for (Transcript transcript : transcripts ){
-            Course course = transcript.getCourseCode();
-            System.out.println(transcript.getCourseCode()+" "+transcript.getName()+" "+ transcript.getScore());
-        }
-    }
+//    public void printCourseScores(){
+//        for (Transcript transcript : transcripts ){
+//            Course course = transcript.getCourseCode();
+//            System.out.println(transcript.getCourseCode()+" "+transcript.getName()+" "+ transcript.getScore());
+//        }
+//    }
 
     /**
      * @return the studentId
@@ -103,20 +103,20 @@ public class Student extends User{
     public void setScores(Set<Score> scores) {
         this.scores = scores;
     }
-
-    /**
-     * @return the transcripts
-     */
-    public List<Transcript> getTranscripts() {
-        return transcripts;
-    }
-
-    /**
-     * @param transcripts the transcripts to set
-     */
-    public void setTranscripts(List<Transcript> transcripts) {
-        this.transcripts = transcripts;
-    }
+//
+//    /**
+//     * @return the transcripts
+//     */
+//    public List<Transcript> getTranscripts() {
+//        return transcripts;
+//    }
+//
+//    /**
+//     * @param transcripts the transcripts to set
+//     */
+//    public void setTranscripts(List<Transcript> transcripts) {
+//        this.transcripts = transcripts;
+//    }
 
     /**
      * @return the supervisor

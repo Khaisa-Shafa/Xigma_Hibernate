@@ -25,7 +25,6 @@ public class Xigma_Hibernate {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         Transaction transaction = session.beginTransaction();
-        
 
         User user = new User("ninja","12345");
         session.save(user);
@@ -57,13 +56,13 @@ public class Xigma_Hibernate {
         score1.setStudent(student1);
         session.save(score1);
         
-        Transcript transcript1 = new Transcript(course1,course1, 89);
-        transcript1.setStudent(student1);
-        session.save(transcript1);
+//        Transcript transcript1 = new Transcript(course1,course1);
+//        transcript1.setStudent(student1);
+//        session.save(transcript1);
                 
-        student1.getTranscripts().add(transcript1);
-        session.update(student1);
-        
+//        student1.getTranscripts().add(transcript1);
+//        session.update(student1);
+
         transaction.commit();
         session.close();
         
