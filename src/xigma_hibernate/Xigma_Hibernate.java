@@ -144,12 +144,9 @@ public class Xigma_Hibernate {
         
         // Update and save GPA
         session.beginTransaction();
-        student1.calculateGPA();
-        session.update(student1);
-        student2.calculateGPA();
-        session.update(student2);
-        student3.calculateGPA();
-        session.update(student3);
+        updateAndSaveGPA(session, student1);
+        updateAndSaveGPA(session, student2);
+        updateAndSaveGPA(session, student3);
         session.getTransaction().commit();
         
          // Fetch and display GPA for each student
@@ -207,6 +204,11 @@ public class Xigma_Hibernate {
         session.close();
         
     }
+    
+    private static void updateAndSaveGPA(Session session, Student student) {
+        student.calculateGPA();
+        session.update(student);
+    }
 
     private static void displayStudentGPA(Session session, int studentId) {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -218,7 +220,6 @@ public class Xigma_Hibernate {
             System.out.println("Student not found");
         }
     }
-    
     private static void displayActivityMeeting(Meeting meeting) {
             System.out.println("meeting : \n" + meeting.getDescription() + "\n" + meeting.getAttendees());
     }

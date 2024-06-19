@@ -4,6 +4,7 @@
  */
 package xigma_hibernate;
 
+import com.sun.jdi.connect.spi.Connection;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;

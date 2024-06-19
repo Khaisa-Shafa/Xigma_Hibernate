@@ -29,7 +29,7 @@ public class Score{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-   
+    
     @Column(name="score_value", nullable=false, unique = true)
     private int score;
     
