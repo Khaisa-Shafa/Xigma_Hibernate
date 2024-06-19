@@ -109,7 +109,7 @@ public class Student extends User{
     public void setStudentId(String studentId) {
         this.studentId = studentId;
     }
-
+    
     /**
      * @return the classes
      */
@@ -159,7 +159,7 @@ public class Student extends User{
     public Teacher getSupervisor() {
         return supervisor;
     }
-
+    
     /**
      * @param supervisor the supervisor to set
      */

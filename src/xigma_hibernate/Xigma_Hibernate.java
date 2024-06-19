@@ -13,6 +13,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import xigma_hibernate.Student;
+import xigma_hibernate.Transcript;
 
 /**
  *
