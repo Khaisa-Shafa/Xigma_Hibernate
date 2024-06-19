@@ -4,12 +4,10 @@
  */
 package xigma_hibernate;
 
-import com.sun.jdi.connect.spi.Connection;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
@@ -17,7 +15,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.*;
-import org.hibernate.Session;
 
 /**
  *

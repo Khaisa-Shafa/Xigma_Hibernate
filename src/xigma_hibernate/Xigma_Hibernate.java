@@ -13,8 +13,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import xigma_hibernate.Student;
-import xigma_hibernate.Transcript;
 
 /**
  *
@@ -39,24 +37,63 @@ public class Xigma_Hibernate {
     
         Student student1 = new Student("khaisa","12345","221401001");
         session.save(student1);
-        
         Student student2 = new Student("shafa","12345","221401002");
         session.save(student2);
-        
         Student student3 = new Student("alya","12345","221401003");
         session.save(student3);
+        Student student4 = new Student("a","12345","221401004");
+        session.save(student4);
+        Student student5 = new Student("b","12345","221401005");
+        session.save(student5);
+        Student student6 = new Student("c","12345","221401006");
+        session.save(student6);
+        Student student7 = new Student("d","12345","221401007");
+        session.save(student7);
+        Student student8 = new Student("e","12345","221401008");
+        session.save(student8);
+        Student student9 = new Student("f","12345","221401009");
+        session.save(student9);
+        Student student10 = new Student("g","12345","2214010010");
+        session.save(student10);
+        Student student11 = new Student("h","12345","221401011");
+        session.save(student11);
+        Student student12 = new Student("i","12345","221401012");
+        session.save(student12);
+        Student student13 = new Student("j","12345","221401013");
+        session.save(student13);
+        Student student14 = new Student("k","12345","221401014");
+        session.save(student14);
+        Student student15 = new Student("l","12345","221401015");
+        session.save(student15);
+        Student student16 = new Student("m","12345","221401016");
+        session.save(student16);
+        Student student17 = new Student("n","12345","221401017");
+        session.save(student17);
+        Student student18 = new Student("o","12345","221401018");
+        session.save(student18);
+        Student student19 = new Student("p","12345","221401019");
+        session.save(student19);
+        Student student20 = new Student("q","12345","2214010020");
+        session.save(student20);
+        
         
         Teacher teacher1 = new Teacher("dewi", "12345", "0102030405");
-        session.save(teacher1);
-        
+        session.save(teacher1);    
         Teacher teacher2 = new Teacher("layla", "12345", "0102030406");
         session.save(teacher2);
-        
+        Teacher teacher3 = new Teacher("teacherA", "12345", "0102030407");
+        session.save(teacher3);    
+        Teacher teacher4 = new Teacher("teacherB", "12345", "0102030408");
+        session.save(teacher4);
+
         Course course1 = new Course("PBO", "ILK010101");
         session.save(course1);
-        
         Course course2 = new Course("JARKOM", "ILK010102");
         session.save(course2);
+        Course course3 = new Course("KDI", "ILK010103");
+        session.save(course3);
+        Course course4 = new Course("ADPL", "ILK010104");
+        session.save(course4);
         
         Class class1 = new Class("KOM A");
         class1.setTeacher(teacher1);
@@ -64,15 +101,39 @@ public class Xigma_Hibernate {
         class1.getStudents().add(student1);
         class1.getStudents().add(student2);
         class1.getStudents().add(student3);
+        class1.getStudents().add(student4);
+        class1.getStudents().add(student5);
         session.save(class1);
         
         Class class2 = new Class("KOM B");
         class2.setTeacher(teacher2);
         class2.setCourse(course2);
-        class2.getStudents().add(student1);
-        class2.getStudents().add(student2);
-        class2.getStudents().add(student3);
+        class2.getStudents().add(student6);
+        class2.getStudents().add(student7);
+        class2.getStudents().add(student8);
+        class2.getStudents().add(student9);
+        class2.getStudents().add(student10);
         session.save(class2);
+        
+        Class class3 = new Class("KOM C");
+        class3.setTeacher(teacher3);
+        class3.setCourse(course2);
+        class3.getStudents().add(student11);
+        class3.getStudents().add(student12);
+        class3.getStudents().add(student13);
+        class3.getStudents().add(student14);
+        class3.getStudents().add(student15);
+        session.save(class3);
+        
+        Class class4 = new Class("KOM D");
+        class4.setTeacher(teacher3);
+        class4.setCourse(course2);
+        class4.getStudents().add(student16);
+        class4.getStudents().add(student17);
+        class4.getStudents().add(student18);
+        class4.getStudents().add(student19);
+        class4.getStudents().add(student20);
+        session.save(class4);
         
         Score score1 = new Score(98);
         score1.setClasses(class1);
@@ -81,36 +142,62 @@ public class Xigma_Hibernate {
         session.save(score1);
         
         Score score2 = new Score(88);
-        score2.setClasses(class2);
-        score2.setStudent(student1);
+        score2.setClasses(class1);
+        score2.setStudent(student2);
         score2.setCourse(course2);
         session.save(score2);
         
-        Score score3 = new Score(95);
+        Score score3 = new Score(68);
         score3.setClasses(class1);
-        score3.setStudent(student2);
-        score3.setCourse(course1);
+        score3.setStudent(student3);
+        score3.setCourse(course3);
         session.save(score3);
         
-        Score score4 = new Score(89);
-        score4.setClasses(class2);
-        score4.setStudent(student2);
+        Score score4 = new Score(74);
+        score4.setClasses(class1);
+        score4.setStudent(student4);
         score4.setCourse(course2);
         session.save(score4);
         
-        Score score5 = new Score(90);
+        Score score5 = new Score(54);
         score5.setClasses(class1);
-        score5.setStudent(student3);
+        score5.setStudent(student5);
         score5.setCourse(course1);
         session.save(score5);
         
-        Score score6 = new Score(93);
+        Score score6 = new Score(100);
         score6.setClasses(class2);
-        score6.setStudent(student3);
+        score6.setStudent(student6);
         score6.setCourse(course2);
         session.save(score6);
         
-        //Fathya test Meeting
+        Score score7 = new Score(48);
+        score7.setClasses(class2);
+        score7.setStudent(student7);
+        score7.setCourse(course1);
+        session.save(score7);
+        
+        Score score8 = new Score(99);
+        score8.setClasses(class2);
+        score8.setStudent(student8);
+        score8.setCourse(course2);
+        session.save(score8);
+        
+        Score score9 = new Score(85);
+        score9.setClasses(class2);
+        score9.setStudent(student9);
+        score9.setCourse(course3);
+        session.save(score9);
+        
+        Score score10 = new Score(90);
+        score10.setClasses(class2);
+        score10.setStudent(student10);
+        score10.setCourse(course4);
+        session.save(score10);
+        
+        
+        
+        //test Meeting
         Meeting meeting1 = new Meeting();
         meeting1.setMeetingStartTime(LocalDateTime.now());
         meeting1.setMyClass(class1);
@@ -124,6 +211,20 @@ public class Xigma_Hibernate {
         
         session.save(meeting1);
         
+        Meeting meeting2= new Meeting();
+        meeting2.setMeetingStartTime(LocalDateTime.now());
+        meeting2.setMyClass(class2);
+        meeting2.setTeacher(teacher2);
+        meeting2.setCourse(course2);
+        
+        Set<Student> attendees2 = new HashSet<>();
+        attendees2.add(student7);
+        attendees2.add(student8);
+        attendees2.add(student10);
+        meeting2.setAttendees(attendees2);
+        
+        session.save(meeting2);
+        
         //test Assignment
         Assignment assignment1 = new Assignment();
         assignment1.setMyClass(class1);
@@ -136,11 +237,23 @@ public class Xigma_Hibernate {
         assignees.add(student2);
         assignment1.setAssignees(assignees);
         
+        Assignment assignment2 = new Assignment();
+        assignment2.setMyClass(class3);
+        assignment2.setTeacher(teacher3);
+        assignment2.setCourse(course3);
+        assignment2.setDueDate(LocalDateTime.now().plusDays(7));
+        
+        Set<Student> assignees2 = new HashSet<>();
+        assignees2.add(student1);
+        assignees2.add(student2);
+        assignment2.setAssignees(assignees2);
+        
+        session.save(assignment2);
         session.save(assignment1);
         
         transaction.commit();
         
-        /*Zihan*/
+        //Zihan/
         
         // Calculate and save GPA for each student
         session.beginTransaction();
