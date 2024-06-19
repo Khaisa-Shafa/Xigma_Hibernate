@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.*;
+import org.hibernate.Session;
 
 /**
  *

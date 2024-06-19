@@ -142,12 +142,18 @@ public class Xigma_Hibernate {
         
         /*Zihan*/
         
-        // Update and save GPA
+        // Calculate and save GPA for each student
         session.beginTransaction();
-        updateAndSaveGPA(session, student1);
-        updateAndSaveGPA(session, student2);
-        updateAndSaveGPA(session, student3);
+        updateAndSaveGPA(session);
         session.getTransaction().commit();
+        
+        // Print GPA table
+        session.beginTransaction();
+        printGPATable(session);
+        session.getTransaction().commit();
+
+        session.close();
+        factory.close();
         
          // Fetch and display GPA for each student
         displayStudentGPA(session, student1.getId());
@@ -205,9 +211,64 @@ public class Xigma_Hibernate {
         
     }
     
-    private static void updateAndSaveGPA(Session session, Student student) {
-        student.calculateGPA();
+    private static void updateAndSaveGPA(Session session) {
+        List<Student> students = session.createQuery("FROM Student", Student.class).getResultList();
+        for (Student student : students) {
+            calculateAndSetGPA(session, student);
+        }
+    }
+    
+    private static void calculateAndSetGPA(Session session, Student student) {
+        List<Score> scores = session.createQuery("FROM Score WHERE student.id = :studentId", Score.class)
+                                    .setParameter("studentId", student.getId())
+                                    .getResultList();
+
+        if (scores == null || scores.isEmpty()) {
+            student.setGpa("E");
+        } else {
+            double totalScore = 0.0;
+            for (Score score : scores) {
+                totalScore += score.getScore();
+            }
+            double gpaValue = totalScore / scores.size();
+            student.setGpa(String.format("%.2f",gpaValue));
+            student.setGpa(convertGradePointToLetter(gpaValue));
+        }
         session.update(student);
+    }
+    
+    private static String convertGradePointToLetter(double gpa) {
+        if (gpa >= 4.0) {
+            return "A";
+        } else if (gpa >= 3.7) {
+            return "A-";
+        } else if (gpa >= 3.3) {
+            return "B+";
+        } else if (gpa >= 3.0) {
+            return "B";
+        } else if (gpa >= 2.7) {
+            return "B-";
+        } else if (gpa >= 2.3) {
+            return "C+";
+        } else if (gpa >= 2.0) {
+            return "C";
+        } else if (gpa >= 1.7) {
+            return "C-";
+        } else if (gpa >= 1.0) {
+            return "D";
+        } else {
+            return "E";
+        }
+    }
+    
+    private static void printGPATable(Session session) {
+        List<Student> students = session.createQuery("FROM Student", Student.class).getResultList();
+
+        System.out.println("+----------------+------+\n| Student ID     | GPA  |\n+----------------+------+");
+        for (Student student : students) {
+            System.out.printf("| %-14s | %-4s |\n", student.getStudentId(), student.getGpa());
+        }
+        System.out.println("+----------------+------+");
     }
 
     private static void displayStudentGPA(Session session, int studentId) {
@@ -220,6 +281,7 @@ public class Xigma_Hibernate {
             System.out.println("Student not found");
         }
     }
+    
     private static void displayActivityMeeting(Meeting meeting) {
             System.out.println("meeting : \n" + meeting.getDescription() + "\n" + meeting.getAttendees());
     }
