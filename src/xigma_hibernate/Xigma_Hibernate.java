@@ -110,13 +110,6 @@ public class Xigma_Hibernate {
         score6.setCourse(course2);
         session.save(score6);
         
-//        Transcript transcript1 = new Transcript(course1,course1);
-//        transcript1.setStudent(student1);
-//        session.save(transcript1);
-                
-//        student1.getTranscripts().add(transcript1);
-//        session.update(student1);
-        
         //Fathya test Meeting
         Meeting meeting1 = new Meeting();
         meeting1.setMeetingStartTime(LocalDateTime.now());
@@ -169,19 +162,15 @@ public class Xigma_Hibernate {
         Transcript transcript1 = new Transcript("C101", "Mathematics", 95);
         Transcript transcript2 = new Transcript("C102", "Science", 88);
 
-            // Add transcripts to the student's transcript list
-            List<Transcript> transcripts = new ArrayList<>();
-            transcripts.add(transcript1);
-            transcripts.add(transcript2);
-            student1.setTranscripts(transcripts);
+        List<Transcript> transcripts = new ArrayList<>();
+        transcripts.add(transcript1);
+        transcripts.add(transcript2);
+        student1.setTranscripts(transcripts);
 
-            //Zihan
-            // Save transcripts
-            session.beginTransaction();
-            session.save(transcript1);
-            session.save(transcript2);
-            session.update(student1);
-            session.getTransaction().commit();
+        session.beginTransaction();
+        student1.getTranscripts();
+        session.update(student1);
+        session.getTransaction().commit();
             
             // Print student1's transcripts
             System.out.println("Transcripts for Student 1:");
