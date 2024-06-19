@@ -26,15 +26,13 @@ public class Xigma_Hibernate {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         Transaction transaction = session.beginTransaction();
 
         SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
 
-        // Create session
-       
         
         User user = new User("ninja","12345");
         session.save(user);
@@ -154,13 +152,6 @@ public class Xigma_Hibernate {
         printGPATable(session);
         session.getTransaction().commit();
 
-        session.close();
-        factory.close();
-        
-         // Fetch and display GPA for each student
-        displayStudentGPA(session, student1.getId());
-        displayStudentGPA(session, student2.getId());
-        displayStudentGPA(session, student3.getId());
         
         displayActivityMeeting(meeting1);
         
@@ -181,9 +172,6 @@ public class Xigma_Hibernate {
             System.out.println("Transcripts for Student 1:");
             student1.printTranscript();
 
-            session.close();
-            factory.close();
-            //Zihan
         
         try {
             
@@ -273,16 +261,6 @@ public class Xigma_Hibernate {
         System.out.println("+----------------+------+");
     }
 
-    private static void displayStudentGPA(Session session, int studentId) {
-        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    
-        Student student = session.get(Student.class, studentId);
-        if (student != null){
-            System.out.println(student.getStudentId() + "'s GPA: " + student.calculateGPA());
-        }else{
-            System.out.println("Student not found");
-        }
-    }
     
     private static void displayActivityMeeting(Meeting meeting) {
             System.out.println("meeting : \n" + meeting.getDescription() + "\n" + meeting.getAttendees());

@@ -28,61 +28,41 @@ import org.hibernate.Session;
 @Table(name="student")
 @PrimaryKeyJoinColumn(name="user_id")
 public class Student extends User{
-    
+
     @Column(name="student_id",nullable=false, unique=true)
     private String studentId;
-    
+
     @Column(name="gpa")
     private String gpa;
-    
+
     @ManyToMany(mappedBy = "students")
     private Set<Class> classes = new HashSet<>();
-    
-    @OneToMany(mappedBy = "student")
-    private Set<Score> scores= new HashSet<>();
-    
+
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+    private Set<Score> scores = new HashSet<>();
+
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "student_transcripts", joinColumns = @JoinColumn(name = "student_id"))
     private List<Transcript> transcripts = new ArrayList<>();
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "supervisor_id")
     private Teacher supervisor;
-    
+
     @ManyToMany(mappedBy = "attendees")
     private Set<Meeting> meetings = new HashSet<>();
-    
+
     @ManyToMany(mappedBy = "assignees")
     private Set<Assignment> assignments = new HashSet<>();
-    
+
     public Student(String username, String password, String studentId) {
         super(username, password);
         this.studentId = studentId;
     }
-    
-//    public void printTranscripts() {
-//        if (transcripts != null && !transcripts.isEmpty()) {
-//            for (Transcript transcript : transcripts) {
-//                System.out.println("Course: " + transcript.getCourseId() + 
-//                                   ", Course Name: " + transcript.getName() + 
-//                                   ", Score: " + transcript.getScore());
-//            }
-//        } else {
-//            System.out.println("No transcripts available for this student.");
-//        }
-//    }
-    
     /**
      * @return the transcripts
      */
     public List<Transcript> getTranscripts() {
-//        if (transcripts != null) {
-//            for (Transcript transcript : transcripts) {
-//                System.out.println("Course: " + transcript.getCourseId() + ", Course Name: " + transcript.getName() + ", Score: " + transcript.getScore());
-//            }
-//        } else {
-//            System.out.println("No transcripts available for this student.");
-//        }
         return transcripts;
     }
     
@@ -163,11 +143,21 @@ public class Student extends User{
     /**
      * @param supervisor the supervisor to set
      */
-    public void setSupervisor(Teacher supervisor) {
-        this.supervisor = supervisor;
+        public void calculateAndSetTranscripts() {
+        List<Transcript> newTranscripts = new ArrayList<>();
+
+        for (Score score : scores) {
+            Transcript transcript = new Transcript(
+                score.getCourse().getCourseId(),
+                score.getCourse().getName(),
+                score.getScore()
+            );
+            newTranscripts.add(transcript);
+        }
+
+        this.transcripts = newTranscripts;
     }
-    
-    /*Zihan*/
+        
     public double calculateGPA() {
         double totalGradePoints = 0.0;
         int totalCourses = scores.size();
@@ -233,13 +223,11 @@ public class Student extends User{
             return "E";
         }
     }
-    
+
     public void printTranscript() {
         System.out.printf("%-15s %-20s %-5s%n", "courseId", "name", "score");
         for (Transcript transcript : transcripts) {
             System.out.printf("%-15s %-20s %-5d%n", transcript.getCourseId(), transcript.getName(), transcript.getScore());
         }
     }
-    /*Zihan*/
-     
 }
