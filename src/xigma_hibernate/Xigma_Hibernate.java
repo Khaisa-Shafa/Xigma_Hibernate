@@ -86,25 +86,25 @@ public class Xigma_Hibernate {
         score2.setCourse(course2);
         session.save(score2);
         
-        Score score3 = new Score(68);
+        Score score3 = new Score(95);
         score3.setClasses(class1);
         score3.setStudent(student2);
         score3.setCourse(course1);
         session.save(score3);
         
-        Score score4 = new Score(74);
+        Score score4 = new Score(89);
         score4.setClasses(class2);
         score4.setStudent(student2);
         score4.setCourse(course2);
         session.save(score4);
         
-        Score score5 = new Score(54);
+        Score score5 = new Score(90);
         score5.setClasses(class1);
         score5.setStudent(student3);
         score5.setCourse(course1);
         session.save(score5);
         
-        Score score6 = new Score(48);
+        Score score6 = new Score(93);
         score6.setClasses(class2);
         score6.setStudent(student3);
         score6.setCourse(course2);

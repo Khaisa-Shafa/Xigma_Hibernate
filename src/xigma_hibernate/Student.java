@@ -48,7 +48,7 @@ public class Student extends User{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "supervisor_id")
     private Teacher supervisor;
-
+    
     @ManyToMany(mappedBy = "attendees")
     private Set<Meeting> meetings = new HashSet<>();
 
